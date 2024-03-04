@@ -12,7 +12,7 @@ const ProductDetailsPage = ({ params }) => {
         const { data } = await axios.get(
           `${process.env.API_URL}/api/products/${params.id}`
         );
-        setProduct(data?.product);
+        setProduct(data);
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
