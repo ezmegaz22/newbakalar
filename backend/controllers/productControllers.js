@@ -10,7 +10,7 @@ export const newProduct = async (req, res, next) => {
 };
 
 export const getProducts = async (req, res, next) => {
-  const resPerPage = 2;
+  const resPerPage = 3;
   const productsCount = await Product.countDocuments();
 
   const apiFilters = new APIFilters(Product.find(), req.query)
@@ -25,7 +25,7 @@ export const getProducts = async (req, res, next) => {
   products = await apiFilters.query.clone();
   res
     .status(200)
-    .json(products, productsCount, resPerPage, filteredProductsCount);
+    .json({products, productsCount, resPerPage, filteredProductsCount});
 };
 
 export const getProduct = async (req, res, next) => {

@@ -26,13 +26,13 @@ const getProducts = async (searchParams) => {
 };
 
 const HomePage = ({ searchParams }) => {
-  const [productsData, setProductsData] = useState([]);
+  const [productsData, setProductsData] = useState(null);
 
   useEffect(() => {
     (async () => setProductsData(await getProducts(searchParams)))();
-  }, []);
-
-  return <ListProducts data={productsData} />;
+  }, [searchParams]);
+  
+  return <ListProducts productsData={productsData} />;
 };
 
 export default HomePage;

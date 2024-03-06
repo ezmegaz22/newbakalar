@@ -5,7 +5,11 @@ import Filters from "../layouts/Filters";
 import ProductItem from "./ProductItem.jsx";
 import CustomPagination from "../layouts/CustomPagination";
 
-const ListProducts = ({ data }) => {
+const ListProducts = ({ productsData }) => {
+  if(!productsData) return null;
+
+  const {resPerPage, filteredProductsCount, products} = productsData;
+
   return (
     <section className="py-12">
       <div className="container max-w-screen-xl mx-auto px-4">
@@ -13,12 +17,12 @@ const ListProducts = ({ data }) => {
           <Filters />
 
           <main className="md:w-2/3 lg:w-3/4 px-3">
-            {data?.map((product) => (
+            {products?.map((product) => (
               <ProductItem key={product?._id} product={product} />
             ))}
             <CustomPagination
-              resPerPage={data?.resPerPage}
-              productsCount={data?.filteredProductsCount}
+              resPerPage={resPerPage}
+              productsCount={filteredProductsCount}
             />
           </main>
         </div>
