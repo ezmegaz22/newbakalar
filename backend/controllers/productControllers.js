@@ -1,4 +1,5 @@
 import Product from "../models/product";
+import APIFilters from "../utils/APIFilters";
 
 export const newProduct = async (req, res, next) => {
   const product = await Product.create(req.body);
@@ -9,17 +10,31 @@ export const newProduct = async (req, res, next) => {
 };
 
 export const getProducts = async (req, res, next) => {
-    const products = await Product.find({});
-    res.status(200).json(products);
-  };
+  const resPerPage = 2;
+  const productsCount = await Product.countDocuments();
 
-  export const getProduct = async (req, res, next) => {
-    const product = await Product.findById(req.query.id);
+  const apiFilters = new APIFilters(Product.find(), req.query)
+    .search()
+    .filter();
 
-    if (!product) {
-      res.status(404).json({
-        error: "Product not found.",
-      });
-    }
-    res.status(200).json(product);
-  };
+  let products = await apiFilters.query;
+  const filteredProductsCount = products.length;
+
+  apiFilters.pagination(resPerPage);
+
+  products = await apiFilters.query.clone();
+  res
+    .status(200)
+    .json(products, productsCount, resPerPage, filteredProductsCount);
+};
+
+export const getProduct = async (req, res, next) => {
+  const product = await Product.findById(req.query.id);
+
+  if (!product) {
+    res.status(404).json({
+      error: "Product not found.",
+    });
+  }
+  res.status(200).json(product);
+};
