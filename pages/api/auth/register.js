@@ -1,14 +1,12 @@
 import { createRouter } from "next-connect";
 import dbConnect from "@/backend/config/dbConnect";
-import {getProduct} from "@/backend/controllers/productControllers";
+import { registerUser } from "@/backend/controllers/authControllers";
 import onError from "@/backend/middlewares/errors"
 
-const router = createRouter({onError});
+const router = createRouter({ onError });
 
 dbConnect();
 
-
-router.get(getProduct)
-
+router.post(registerUser);
 
 export default router.handler();

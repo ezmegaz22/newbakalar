@@ -1,14 +1,16 @@
 import Header from "@/components/layouts/Header";
 import "./globals.css";
-import Head from "./head";
+import { GlobalProvider } from "./GlobalProvider.jsx";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head />
+      <head />
       <body>
-        <Header />
-        {children}
+        <GlobalProvider>
+          <Header />
+          {children}
+        </GlobalProvider>
       </body>
     </html>
   );
