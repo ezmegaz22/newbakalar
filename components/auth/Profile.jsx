@@ -1,10 +1,8 @@
 "use client";
 import React, { useContext } from "react";
-
-//import UserAddresses from "../user/UserAddresses";
+import UserAddresses from "../user/UserAddresses";
 import Link from "next/link";
 import AuthContext from "@/context/AuthContext";
-import UserAddresses from "../user/UserAddresses";
 
 const Profile = ({ addresses }) => {
   const { user } = useContext(AuthContext);

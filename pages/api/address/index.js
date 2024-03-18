@@ -4,14 +4,12 @@ import {
   getAddresses,
   newAddress,
 } from "@/backend/controllers/addressControllers";
-import { isAuthenticatedUser } from "@/backend/middlewares/auth";
-import onError from "@/backend/middlewares/errors";
 
-const router = createRouter(onError);
+const router = createRouter();
 
 dbConnect();
 
-router.use(isAuthenticatedUser).get(getAddresses);
-router.use(isAuthenticatedUser).post(newAddress);
+router.get(getAddresses);
+router.post(newAddress);
 
 export default router.handler();

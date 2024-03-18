@@ -7,8 +7,9 @@ import { useSession } from "next-auth/react";
 import AuthContext from "@/context/AuthContext";
 
 const Header = () => {
-  const { data } = useSession();
   const { user, setUser } = useContext(AuthContext);
+  const { data } = useSession();
+
   console.log(data);
 
   useEffect(() => {

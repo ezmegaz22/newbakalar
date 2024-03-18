@@ -3,7 +3,8 @@ import dbConnect from "@/backend/config/dbConnect";
 import { registerUser } from "@/backend/controllers/authControllers";
 import onError from "@/backend/middlewares/errors"
 
-const router = createRouter({ onError });
+
+const router = createRouter({onError});
 
 dbConnect();
 

@@ -21,6 +21,7 @@ const Login = () => {
     const data = await signIn("credentials", {
       email,
       password,
+      redirect: false,
       callbackUrl: callBackUrl ? parseCallbackUrl(callBackUrl) : "/",
     });
 

@@ -1,4 +1,4 @@
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 import CredentialsProdiver from "next-auth/providers/credentials";
 
 import User from "@/backend/models/user";
@@ -16,17 +16,18 @@ export default async function auth(req, res) {
           dbConnect();
 
           const { email, password } = credentials;
+
           const user = await User.findOne({ email }).select("+password");
 
           if (!user) {
-            throw new Error("Invalid email or password");
+            throw new Error("Helytelen email cím, vagy jelszó!");
           }
           const isPasswordMatched = await bcrypt.compare(
             password,
             user.password
           );
           if (!isPasswordMatched) {
-            throw new Error("Invalid email or password");
+            throw new Error("Helytelen email cím, vagy jelszó!");
           }
           return user;
         },

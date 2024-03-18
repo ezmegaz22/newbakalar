@@ -47,36 +47,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const updateAddress = async (id, address) => {
-    try {
-      const { data } = await axios.put(
-        `${process.env.API_URL}/api/address${id}`,
-        address
-      );
-
-      if (data?.address) {
-        setUpdated(true);
-        router.replace(`/address/${id}`);
-      }
-    } catch (error) {
-      setError(error?.response?.data?.message);
-    }
-  };
-
-  const deleteAddress = async (id) => {
-    try {
-      const { data } = await axios.delete(
-        `${process.env.API_URL}/api/address${id}`,
-      );
-
-      if (data?.success) {
-        router.push("/me")
-      }
-    } catch (error) {
-      setError(error?.response?.data?.message);
-    }
-  };
-
   const clearErrors = () => {
     setError(null);
   };
@@ -90,8 +60,6 @@ export const AuthProvider = ({ children }) => {
         setUser,
         registerUser,
         addNewAddress,
-        updateAddress,
-        deleteAddress,
         setUpdated,
         clearErrors,
       }}

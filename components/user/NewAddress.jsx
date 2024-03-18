@@ -1,5 +1,6 @@
 "use client";
-import React, { useContext, useState, useEffect } from "react";
+
+import React, { useState, useContext } from "react";
 
 import Sidebar from "../layouts/Sidebar";
 import { countries } from "countries-list";
@@ -14,15 +15,8 @@ const NewAddress = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
+  const [phoneNo, setPhonoNo] = useState("");
   const [country, setCountry] = useState("");
-
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      clearErrors();
-    }
-  }, [error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -56,7 +50,7 @@ const NewAddress = () => {
                   </h2>
 
                   <div className="mb-4 md:col-span-2">
-                    <label className="block mb-1"> Street* </label>
+                    <label className="block mb-1"> Street </label>
                     <input
                       className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
                       type="text"
@@ -109,7 +103,7 @@ const NewAddress = () => {
                         type="number"
                         placeholder="Type phone no here"
                         value={phoneNo}
-                        onChange={(e) => setPhoneNo(e.target.value)}
+                        onChange={(e) => setPhonoNo(e.target.value)}
                       />
                     </div>
                   </div>
@@ -117,9 +111,9 @@ const NewAddress = () => {
                   <div className="mb-4 md:col-span-2">
                     <label className="block mb-1"> Country </label>
                     <select
+                      className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
                       value={country}
                       onChange={(e) => setCountry(e.target.value)}
-                      className="appearance-none border border-gray-200 bg-gray-100 rounded-md py-2 px-3 hover:border-gray-400 focus:outline-none focus:border-gray-400 w-full"
                     >
                       {countriesList.map((country) => (
                         <option key={country.name} value={country.name}>
