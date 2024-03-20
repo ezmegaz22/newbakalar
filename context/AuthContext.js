@@ -9,7 +9,6 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const [updated, setUpdated] = useState(false);
 
   const router = useRouter();
 
@@ -23,12 +22,17 @@ export const AuthProvider = ({ children }) => {
           password,
         }
       );
-
+  
       if (data?.user) {
         router.push("/");
       }
     } catch (error) {
-      setError(error?.response?.data?.message);
+      if (error.response && error.response.status === 400 && error.response.data.code === 11000) {
+        const message = `Foglalt email cím`;
+        setError(message);
+      } else {
+        setError(error?.response?.data?.message || "A megadott email cím már foglalt!");
+      }
     }
   };
 
@@ -56,11 +60,9 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         error,
-        updated,
         setUser,
         registerUser,
         addNewAddress,
-        setUpdated,
         clearErrors,
       }}
     >
