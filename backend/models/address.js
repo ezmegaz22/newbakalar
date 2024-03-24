@@ -20,16 +20,15 @@ const addressSchema = new mongoose.Schema({
   zipCode: {
     type: String,
     required: true,
-  }, 
-  country: { 
-    type: String, 
-     
-  }, 
-  //user: { 
-    //type: mongoose.Schema.Types.ObjectId, 
-    //required: true,
-    //ref: "User",
-  //},
+  },
+  country: {
+    type: String,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
   createdAt: {
     type: Date,
     default: Date.now,
